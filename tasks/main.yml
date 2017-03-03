@@ -15,7 +15,7 @@
       - python-dev
       - exuberant-ctags
       - realpath
-      - gccgo-go
+      - golang-go
 
 - name: Create directories 
   file:
