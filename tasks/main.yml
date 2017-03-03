@@ -1,0 +1,109 @@
+---
+- name: Install vim and dependencies
+  when: ansible_os_family == "Debian"
+  apt:
+      name: "{{item}}"
+      state: installed
+      update_cache: yes
+  become: true
+  with_items:
+      - vim
+      - git
+      - clang
+      - build-essential
+      - cmake
+      - python-dev
+      - exuberant-ctags
+      - realpath
+      - gccgo-go
+
+- name: Create directories 
+  file:
+      path: "{{item}}"
+      state: directory
+      recurse: true
+  with_items:
+      - "{{local_repositories_dir}}"
+      - "~/.vim/bundle"
+      - "~/.vim/autoload"
+
+- name: Install Vim configuration files
+  copy:
+      dest: "~/.vimrc"
+      src: vimrc
+
+- name: Vim Pathogen
+  git:
+      repo: https://github.com/tpope/vim-pathogen.git
+      dest: "{{local_repositories_dir}}/vim-pathogen"
+
+- name: Link Pathogen
+  file:
+      src: "{{local_repositories_dir}}/vim-pathogen/autoload/pathogen.vim"
+      dest: "~/.vim/autoload/pathogen.vim"
+      state: link
+  
+- name: ultisnips
+  git: repo=https://github.com/SirVer/ultisnips.git dest="{{local_repositories_dir}}/ultisnips"
+
+- name: vim-snippets
+  git: repo=git://github.com/honza/vim-snippets.git dest="{{local_repositories_dir}}/vim-snippets"
+
+- name: vim-fugitive
+  git: repo=https://github.com/tpope/vim-fugitive.git dest="{{local_repositories_dir}}/vim-fugitive"
+
+- name: pyflakes-vim
+  git: repo=https://github.com/kevinw/pyflakes-vim.git dest="{{local_repositories_dir}}/pyflakes-vim"
+
+- name: syntastic
+  git: repo=https://github.com/scrooloose/syntastic.git dest="{{local_repositories_dir}}/syntastic"
+
+- name: vim-airline
+  git: repo=https://github.com/bling/vim-airline.git dest="{{local_repositories_dir}}/vim-airline"
+
+- name: ctrlp.vim
+  git: repo=https://github.com/kien/ctrlp.vim.git dest="{{local_repositories_dir}}/ctrlp.vim"
+
+- name: supertab
+  git: repo=https://github.com/ervandew/supertab.git dest="{{local_repositories_dir}}/supertab"
+
+- name: svnj.vim
+  git: repo=https://github.com/juneedahamed/svnj.vim.git dest="{{local_repositories_dir}}/svnj.vim"
+
+- name: vim-man
+  git: repo=https://github.com/bruno-/vim-man.git dest="{{local_repositories_dir}}/vim-man"
+
+- name: nerdtree
+  git: repo=https://github.com/scrooloose/nerdtree dest="{{local_repositories_dir}}/nerdtree"
+
+- name: pydoc.vim
+  git: repo=https://github.com/fs111/pydoc.vim.git dest="{{local_repositories_dir}}/pydoc.vim"
+
+- name: vim-go
+  git: repo=https://github.com/fatih/vim-go.git dest="{{local_repositories_dir}}/vim-go"
+      
+- name: tagbar
+  git: repo=https://github.com/majutsushi/tagbar.git dest="{{local_repositories_dir}}/tagbar"
+      
+  #- name: YouCompleteMe
+  #  git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{local_repositories_dir}}/YouCompleteMe" track_submodules=yes force=yes
+  #  notify: Build YouCompleteMe
+
+- name: symlink Vim bundles
+  file: src="{{local_repositories_dir}}/{{item}}" dest="~/.vim/bundle/{{item}}" state=link
+  with_items:
+      - ultisnips
+      - vim-snippets
+      - vim-fugitive
+      - pyflakes-vim
+      - syntastic
+      - vim-airline
+      - ctrlp.vim
+      - supertab
+      - svnj.vim
+      - vim-man
+      - nerdtree
+      - pydoc.vim
+      - vim-go
+      - tagbar
+        #- YouCompleteMe

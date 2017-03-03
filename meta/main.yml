@@ -1,0 +1,11 @@
+galaxy_info:
+  author: Robert Larsen <robert@the-playground.dk>
+  description: Installs Vim, plugins and my .vimrc
+  company:
+  license: GPLv2
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial

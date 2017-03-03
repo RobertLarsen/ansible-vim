@@ -1,0 +1,8 @@
+---
+- name: Build YouCompleteMe
+  shell: ./install.py --clang-completer --tern-completer > install.log 2>&1
+  args:
+      chdir: "{{local_repositories_dir}}/YouCompleteMe"
+      creates: install.log
+  environment:
+      GOPATH: "{{go_path}}"
