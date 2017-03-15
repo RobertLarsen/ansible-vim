@@ -27,6 +27,14 @@
       - "~/.vim/bundle"
       - "~/.vim/autoload"
 
+- name: Have ctags
+  command: "ctags-exuberant --fields=+S --sort=yes -f ~/.vim/{{item.outfile}} -R {{item.path}}"
+  args:
+      creates: "~/.vim/{{item.outfile}}"
+  with_items:
+      - {outfile: "systags", path: "/usr/include"}
+      - {outfile: "linuxtags", path: "/usr/src/linux-headers-{{ansible_kernel}}"}
+
 - name: Install Vim configuration files
   copy:
       dest: "~/.vimrc"
