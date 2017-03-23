@@ -1,5 +1,5 @@
 ---
-- name: Install vim and dependencies
+- name: Install vim and dependencies, Debian version
   when: ansible_os_family == "Debian"
   apt:
       name: "{{item}}"
@@ -17,6 +17,30 @@
       - realpath
       - golang-go
 
+- name: Install vim and dependencies, RedHat version
+  when: ansible_os_family == "RedHat"
+  yum:
+      name: "{{item}}"
+      state: installed
+  become: true
+  with_items:
+      - vim-enhanced
+      - git
+      - clang
+      - gcc
+      - gcc-c++
+      - cmake
+      - python-devel
+      - ctags
+      - golang-bin
+      - golang-docs
+
+- set_fact: ctags=ctags
+  when: ansible_os_family == "RedHat"
+
+- set_fact: ctags=ctags-exuberant
+  when: ansible_os_family == "Debian"
+
 - name: Create directories 
   file:
       path: "{{item}}"
@@ -28,7 +52,7 @@
       - "~/.vim/autoload"
 
 - name: Have ctags
-  command: "ctags-exuberant --fields=+S --sort=yes -f ~/.vim/{{item.outfile}} -R {{item.path}}"
+  command: "{{ctags}} --fields=+S --sort=yes -f ~/.vim/{{item.outfile}} -R {{item.path}}"
   args:
       creates: "~/.vim/{{item.outfile}}"
   with_items:
