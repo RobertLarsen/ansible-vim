@@ -48,19 +48,19 @@
       recurse: true
   with_items:
       - "{{local_repositories_dir}}"
-      - "~/.vim/bundle"
-      - "~/.vim/autoload"
+      - "{{ansible_user_dir}}/.vim/bundle"
+      - "{{ansible_user_dir}}/.vim/autoload"
 
 - name: Have ctags
-  command: "{{ctags}} --fields=+S --sort=yes -f ~/.vim/{{item.outfile}} -R {{item.path}}"
+  command: "{{ctags}} --fields=+S --sort=yes -f {{ansible_user_dir}}/.vim/{{item.outfile}} -R {{item.path}}"
   args:
-      creates: "~/.vim/{{item.outfile}}"
+      creates: "{{ansible_user_dir}}/.vim/{{item.outfile}}"
   with_items:
       - {outfile: "systags", path: "/usr/include"}
 
 - name: Install Vim configuration files
   copy:
-      dest: "~/.vimrc"
+      dest: "{{ansible_user_dir}}/.vimrc"
       src: vimrc
 
 - name: Install Vim plugins

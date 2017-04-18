@@ -1,2 +1,2 @@
 ---
-local_repositories_dir: ~/.repositories
+local_repositories_dir: "{{ansible_user_dir}}/.repositories"
