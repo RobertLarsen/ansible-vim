@@ -63,5 +63,10 @@
       dest: "{{ansible_user_dir}}/.vimrc"
       src: vimrc
 
+- name: Install TMUX configuration file
+  copy:
+      dest: "{{ansible_user_dir}}/.tmux.conf"
+      src: tmux.conf
+
 - name: Install Vim plugins
   include: install_vim_plugins.yml
