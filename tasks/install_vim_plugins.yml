@@ -11,7 +11,7 @@
       state: link
   
 - name: Vim TMUX Navigator
-  git: repo=https://github.com/christoomey/vim-tmux-navigator.git dest="{{local_repositories_dir}}/vim-tmux-navigator
+  git: repo=https://github.com/christoomey/vim-tmux-navigator.git dest="{{local_repositories_dir}}/vim-tmux-navigator"
 
 - name: UltiSnips
   git: repo=https://github.com/SirVer/ultisnips.git dest="{{local_repositories_dir}}/ultisnips"
