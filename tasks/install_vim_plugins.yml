@@ -74,4 +74,5 @@
       - pydoc.vim
       - vim-go
       - tagbar
+      - vim-tmux-navigator
         #- YouCompleteMe
