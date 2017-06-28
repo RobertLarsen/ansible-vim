@@ -77,5 +77,14 @@
       src: "{{local_repositories_dir}}/dotfiles/tmux.conf"
       state: link
 
+- name: Install PHP Coding Standard Fixer
+  become: true
+  get_url:
+      url: http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar
+      dest: /usr/local/bin/php-cs-fixer-v2.phar
+      owner: root
+      group: root
+      mode: "0755"
+
 - name: Install Vim plugins
   include: install_vim_plugins.yml
