@@ -60,15 +60,22 @@
   with_items:
       - {outfile: "systags", path: "/usr/include"}
 
+- name: Have my dotfiles
+  git: 
+      repo: https://github.com/RobertLarsen/dotfiles.git
+      dest: "{{local_repositories_dir}}/dotfiles"
+
 - name: Install Vim configuration files
-  copy:
+  file:
       dest: "{{ansible_user_dir}}/.vimrc"
-      src: vimrc
+      src: "{{local_repositories_dir}}/dotfiles/vimrc"
+      state: link
 
 - name: Install TMUX configuration file
-  copy:
+  file:
       dest: "{{ansible_user_dir}}/.tmux.conf"
-      src: tmux.conf
+      src: "{{local_repositories_dir}}/dotfiles/tmux.conf"
+      state: link
 
 - name: Install Vim plugins
   include: install_vim_plugins.yml
