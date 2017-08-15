@@ -58,7 +58,8 @@
   #- git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{local_repositories_dir}}/YouCompleteMe" track_submodules=yes force=yes
   #  notify: Build YouCompleteMe
 
-- file: src="{{local_repositories_dir}}/{{item}}" dest="{{ansible_user_dir}}/.vim/bundle/{{item}}" state=link
+- name: Symlink vim plugins
+  file: src="{{local_repositories_dir}}/{{item}}" dest="{{ansible_user_dir}}/.vim/bundle/{{item}}" state=link
   with_items:
       - ultisnips
       - vim-snippets
