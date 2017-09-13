@@ -17,6 +17,7 @@
       - realpath
       - golang-go
       - tmux
+      - shellcheck
 
 - name: Install vim and dependencies, RedHat version
   when: ansible_os_family == "RedHat"
@@ -36,6 +37,7 @@
       - golang-bin
       - golang-docs
       - tmux
+      - shellcheck
 
 - set_fact: ctags=ctags
   when: ansible_os_family == "RedHat"
