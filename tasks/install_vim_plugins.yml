@@ -55,6 +55,9 @@
 - name: Tagbar
   git: repo=https://github.com/majutsushi/tagbar.git dest="{{local_repositories_dir}}/tagbar"
       
+- name: Vim-ps1
+  git: repo=https://github.com/PProvost/vim-ps1.git dest="{{local_repositories_dir}}/vim-ps1"
+      
   #- git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{local_repositories_dir}}/YouCompleteMe" track_submodules=yes force=yes
   #  notify: Build YouCompleteMe
 
@@ -76,4 +79,5 @@
       - vim-go
       - tagbar
       - vim-tmux-navigator
+      - vim-ps1
         #- YouCompleteMe
