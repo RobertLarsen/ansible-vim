@@ -108,4 +108,4 @@
       mode: "0755"
 
 - name: Install Vim plugins
-  include: install_vim_plugins.yml
+  import_tasks: install_vim_plugins.yml
