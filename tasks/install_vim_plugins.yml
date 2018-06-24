@@ -22,12 +22,6 @@
 - name: Fugitive
   git: repo=https://github.com/tpope/vim-fugitive.git dest="{{local_repositories_dir}}/vim-fugitive"
 
-- name: PyFlakes
-  git: repo=https://github.com/kevinw/pyflakes-vim.git dest="{{local_repositories_dir}}/pyflakes-vim"
-
-- name: Syntastic
-  git: repo=https://github.com/scrooloose/syntastic.git dest="{{local_repositories_dir}}/syntastic"
-
 - name: Airline
   git: repo=https://github.com/bling/vim-airline.git dest="{{local_repositories_dir}}/vim-airline"
 
@@ -57,6 +51,22 @@
       
 - name: Vim-ps1
   git: repo=https://github.com/PProvost/vim-ps1.git dest="{{local_repositories_dir}}/vim-ps1"
+
+- name: vim-eunuch
+  git: repo=https://github.com/tpope/vim-eunuch.git dest="{{local_repositories_dir}}/vim-eunuch"
+
+- name: ale
+  git: repo=https://github.com/w0rp/ale.git dest="{{local_repositories_dir}}/ale"
+
+- name: Don't have old vim plugins
+  file:
+      state: absent
+      path: "{{item}}"
+  with_items:
+      - "{{local_repositories_dir}}/pyflakes-vim"
+      - "{{ansible_user_dir}}/.vim/bundle/pyflakes-vim"
+      - "{{local_repositories_dir}}/syntastic"
+      - "{{ansible_user_dir}}/.vim/bundle/syntastic"
       
   #- git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{local_repositories_dir}}/YouCompleteMe" track_submodules=yes force=yes
   #  notify: Build YouCompleteMe
@@ -67,8 +77,6 @@
       - ultisnips
       - vim-snippets
       - vim-fugitive
-      - pyflakes-vim
-      - syntastic
       - vim-airline
       - ctrlp.vim
       - supertab
@@ -80,4 +88,5 @@
       - tagbar
       - vim-tmux-navigator
       - vim-ps1
+      - ale
         #- YouCompleteMe
