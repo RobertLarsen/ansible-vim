@@ -1,0 +1,5 @@
+---
+- name: Add PPA for Vim 8
+  become: true
+  apt_repository:
+      repo: ppa:jonathonf/vim
