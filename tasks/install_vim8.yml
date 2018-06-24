@@ -3,3 +3,8 @@
   become: true
   apt_repository:
       repo: ppa:jonathonf/vim
+
+- name: Add PPA for neovim
+  become: true
+  apt_repository:
+      repo: ppa:neovim-ppa/stable
