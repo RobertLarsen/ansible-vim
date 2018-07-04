@@ -3,6 +3,10 @@
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16"
   include_tasks: install_vim8.yml
 
+- name: Install neovim
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16"
+  include_tasks: install_neovim.yml
+
 - name: Install vim and dependencies, Debian version
   when: ansible_os_family == "Debian"
   apt:
