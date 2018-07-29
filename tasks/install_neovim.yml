@@ -9,6 +9,11 @@
   apt:
       name: neovim
 
+- name: Install pip3
+  become: true
+  apt:
+      name: python3-pip
+
 - name: Install NeoVim pip package for Python 2
   become: true
   pip:
