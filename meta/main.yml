@@ -13,4 +13,4 @@ galaxy_info:
     - trusty
     - xenial
   galaxy_tags: []
-dependencies:
+dependencies: []
