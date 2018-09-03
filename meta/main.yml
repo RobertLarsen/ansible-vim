@@ -1,7 +1,7 @@
 galaxy_info:
   author: Robert Larsen <robert@the-playground.dk>
   description: Installs Vim, plugins and my .vimrc
-  company:
+  company: None
   license: GPLv2
   min_ansible_version: 1.2
   platforms:
@@ -12,5 +12,7 @@ galaxy_info:
     versions:
     - trusty
     - xenial
-  galaxy_tags: []
+  galaxy_tags:
+      - vim
+      - neovim
 dependencies: []
