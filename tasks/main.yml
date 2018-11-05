@@ -14,12 +14,11 @@
 
 - name: Install vim and dependencies, Debian version
   when: ansible_os_family == "Debian"
+  become: true
   apt:
-      name: "{{item}}"
       state: installed
       update_cache: yes
-  become: true
-  with_items:
+      name:
       - neovim
       - vim
       - git
