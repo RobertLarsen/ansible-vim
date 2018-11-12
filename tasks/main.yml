@@ -33,11 +33,9 @@
 
 - name: Install vim and dependencies, RedHat version
   when: ansible_os_family == "RedHat"
-  yum:
-      name: "{{item}}"
-      state: installed
   become: true
-  with_items:
+  yum:
+      name:
       - vim-enhanced
       - git
       - clang
