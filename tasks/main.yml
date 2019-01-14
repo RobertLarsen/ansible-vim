@@ -16,7 +16,6 @@
   when: ansible_os_family == "Debian"
   become: true
   apt:
-      state: installed
       update_cache: yes
       name:
       - neovim
