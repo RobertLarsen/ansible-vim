@@ -2,78 +2,78 @@
 - name: Vim Pathogen
   git:
       repo: https://github.com/tpope/vim-pathogen.git
-      dest: "{{local_repositories_dir}}/vim-pathogen"
+      dest: "{{ local_repositories_dir }}/vim-pathogen"
 
 - name: Link Pathogen
   file:
-      src: "{{local_repositories_dir}}/vim-pathogen/autoload/pathogen.vim"
-      dest: "{{ansible_user_dir}}/.vim/autoload/pathogen.vim"
+      src: "{{ local_repositories_dir }}/vim-pathogen/autoload/pathogen.vim"
+      dest: "{{ ansible_user_dir }}/.vim/autoload/pathogen.vim"
       state: link
   
 - name: Vim TMUX Navigator
-  git: repo=https://github.com/christoomey/vim-tmux-navigator.git dest="{{local_repositories_dir}}/vim-tmux-navigator"
+  git: repo=https://github.com/christoomey/vim-tmux-navigator.git dest="{{ local_repositories_dir }}/vim-tmux-navigator"
 
 - name: UltiSnips
-  git: repo=https://github.com/SirVer/ultisnips.git dest="{{local_repositories_dir}}/ultisnips"
+  git: repo=https://github.com/SirVer/ultisnips.git dest="{{ local_repositories_dir }}/ultisnips"
 
 - name: Snippets
-  git: repo=git://github.com/honza/vim-snippets.git dest="{{local_repositories_dir}}/vim-snippets"
+  git: repo=git://github.com/honza/vim-snippets.git dest="{{ local_repositories_dir }}/vim-snippets"
 
 - name: Fugitive
-  git: repo=https://github.com/tpope/vim-fugitive.git dest="{{local_repositories_dir}}/vim-fugitive"
+  git: repo=https://github.com/tpope/vim-fugitive.git dest="{{ local_repositories_dir }}/vim-fugitive"
 
 - name: Airline
-  git: repo=https://github.com/bling/vim-airline.git dest="{{local_repositories_dir}}/vim-airline"
+  git: repo=https://github.com/bling/vim-airline.git dest="{{ local_repositories_dir }}/vim-airline"
 
 - name: CTRLP
-  git: repo=https://github.com/kien/ctrlp.vim.git dest="{{local_repositories_dir}}/ctrlp.vim"
+  git: repo=https://github.com/kien/ctrlp.vim.git dest="{{ local_repositories_dir }}/ctrlp.vim"
 
 - name: supertab
-  git: repo=https://github.com/ervandew/supertab.git dest="{{local_repositories_dir}}/supertab"
+  git: repo=https://github.com/ervandew/supertab.git dest="{{ local_repositories_dir }}/supertab"
 
 - name: svnj
-  git: repo=https://github.com/juneedahamed/svnj.vim.git dest="{{local_repositories_dir}}/svnj.vim"
+  git: repo=https://github.com/juneedahamed/svnj.vim.git dest="{{ local_repositories_dir }}/svnj.vim"
 
 - name: Man
-  git: repo=https://github.com/bruno-/vim-man.git dest="{{local_repositories_dir}}/vim-man"
+  git: repo=https://github.com/bruno-/vim-man.git dest="{{ local_repositories_dir }}/vim-man"
 
 - name: NerdTree
-  git: repo=https://github.com/scrooloose/nerdtree dest="{{local_repositories_dir}}/nerdtree"
+  git: repo=https://github.com/scrooloose/nerdtree dest="{{ local_repositories_dir }}/nerdtree"
 
 - name: PyDoc
-  git: repo=https://github.com/fs111/pydoc.vim.git dest="{{local_repositories_dir}}/pydoc.vim"
+  git: repo=https://github.com/fs111/pydoc.vim.git dest="{{ local_repositories_dir }}/pydoc.vim"
 
 - name: Vim-Go
-  git: repo=https://github.com/fatih/vim-go.git dest="{{local_repositories_dir}}/vim-go"
+  git: repo=https://github.com/fatih/vim-go.git dest="{{ local_repositories_dir }}/vim-go"
       
 - name: Tagbar
-  git: repo=https://github.com/majutsushi/tagbar.git dest="{{local_repositories_dir}}/tagbar"
+  git: repo=https://github.com/majutsushi/tagbar.git dest="{{ local_repositories_dir }}/tagbar"
       
 - name: Vim-ps1
-  git: repo=https://github.com/PProvost/vim-ps1.git dest="{{local_repositories_dir}}/vim-ps1"
+  git: repo=https://github.com/PProvost/vim-ps1.git dest="{{ local_repositories_dir }}/vim-ps1"
 
 - name: vim-eunuch
-  git: repo=https://github.com/tpope/vim-eunuch.git dest="{{local_repositories_dir}}/vim-eunuch"
+  git: repo=https://github.com/tpope/vim-eunuch.git dest="{{ local_repositories_dir }}/vim-eunuch"
 
 - name: syntastic
-  git: repo=https://github.com/vim-syntastic/syntastic.git dest="{{local_repositories_dir}}/syntastic"
+  git: repo=https://github.com/vim-syntastic/syntastic.git dest="{{ local_repositories_dir }}/syntastic"
 
   #- name: ale
-  #  git: repo=https://github.com/w0rp/ale.git dest="{{local_repositories_dir}}/ale"
+  #  git: repo=https://github.com/w0rp/ale.git dest="{{ local_repositories_dir }}/ale"
 
 - name: Don't have old vim plugins
   file:
       state: absent
-      path: "{{item}}"
+      path: "{{ item }}"
   with_items:
-      - "{{local_repositories_dir}}/pyflakes-vim"
-      - "{{ansible_user_dir}}/.vim/bundle/pyflakes-vim"
+      - "{{ local_repositories_dir }}/pyflakes-vim"
+      - "{{ ansible_user_dir }}/.vim/bundle/pyflakes-vim"
       
-  #- git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{local_repositories_dir}}/YouCompleteMe" track_submodules=yes force=yes
+  #- git: repo=https://github.com/Valloric/YouCompleteMe.git dest="{{ local_repositories_dir }}/YouCompleteMe" track_submodules=yes force=yes
   #  notify: Build YouCompleteMe
 
 - name: Symlink vim plugins
-  file: src="{{local_repositories_dir}}/{{item}}" dest="{{ansible_user_dir}}/.vim/bundle/{{item}}" state=link
+  file: src="{{ local_repositories_dir }}/{{ item }}" dest="{{ ansible_user_dir }}/.vim/bundle/{{ item }}" state=link
   with_items:
       - ultisnips
       - vim-snippets

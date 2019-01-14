@@ -2,7 +2,7 @@
 - name: Have my dotfiles
   git: 
       repo: https://github.com/RobertLarsen/dotfiles.git
-      dest: "{{local_repositories_dir}}/dotfiles"
+      dest: "{{ local_repositories_dir }}/dotfiles"
 
 - name: Install Vim 8
   when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16"
@@ -56,18 +56,18 @@
 
 - name: Create directories 
   file:
-      path: "{{item}}"
+      path: "{{ item }}"
       state: directory
       recurse: true
   with_items:
-      - "{{local_repositories_dir}}"
-      - "{{ansible_user_dir}}/.vim/bundle"
-      - "{{ansible_user_dir}}/.vim/autoload"
+      - "{{ local_repositories_dir }}"
+      - "{{ ansible_user_dir }}/.vim/bundle"
+      - "{{ ansible_user_dir }}/.vim/autoload"
 
 - name: Have ctags
-  command: "{{ctags}} --fields=+S --sort=yes -f {{ansible_user_dir}}/.vim/{{item.outfile}} -R {{item.path}}"
+  command: "{{ ctags }} --fields=+S --sort=yes -f {{ ansible_user_dir }}/.vim/{{ item.outfile }} -R {{ item.path }}"
   args:
-      creates: "{{ansible_user_dir}}/.vim/{{item.outfile}}"
+      creates: "{{ ansible_user_dir }}/.vim/{{ item.outfile }}"
   with_items:
       - {outfile: "systags", path: "/usr/include"}
 
@@ -75,31 +75,31 @@
 # Now I would rather have symlinks to a GitHub repo
 # So if they are files, delete them
 - name: Check if .vimrc is a file
-  stat: path="{{ansible_user_dir}}/.vimrc"
+  stat: path="{{ ansible_user_dir }}/.vimrc"
   register: vimrc
 
 - name: Check if .tmux.conf is a file
-  stat: path="{{ansible_user_dir}}/.tmux.conf"
+  stat: path="{{ ansible_user_dir }}/.tmux.conf"
   register: tmux_conf
 
 - name: Delete .vimrc if it is a file
-  file: path="{{ansible_user_dir}}/.vimrc" state=absent
+  file: path="{{ ansible_user_dir }}/.vimrc" state=absent
   when: vimrc.stat.isreg is defined and vimrc.stat.isreg
 
 - name: Delete .tmux.conf if it is a file
-  file: path="{{ansible_user_dir}}/.tmux.conf" state=absent
+  file: path="{{ ansible_user_dir }}/.tmux.conf" state=absent
   when: tmux_conf.stat.isreg is defined and tmux_conf.stat.isreg
 
 - name: Install Vim configuration files
   file:
-      dest: "{{ansible_user_dir}}/.vimrc"
-      src: "{{local_repositories_dir}}/dotfiles/vimrc"
+      dest: "{{ ansible_user_dir }}/.vimrc"
+      src: "{{ local_repositories_dir }}/dotfiles/vimrc"
       state: link
 
 - name: Install TMUX configuration file
   file:
-      dest: "{{ansible_user_dir}}/.tmux.conf"
-      src: "{{local_repositories_dir}}/dotfiles/tmux.conf"
+      dest: "{{ ansible_user_dir }}/.tmux.conf"
+      src: "{{ local_repositories_dir }}/dotfiles/tmux.conf"
       state: link
 
 - name: Install PHP Coding Standard Fixer

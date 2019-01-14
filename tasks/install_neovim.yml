@@ -28,12 +28,12 @@
 
 - name: Have a configuration directory for NeoVim
   file:
-      dest: "{{ansible_user_dir}}/.config/nvim"
+      dest: "{{ ansible_user_dir }}/.config/nvim"
       state: directory
       mode: 0750
 
 - name: Have my NeoVim configuration files
   file:
-      dest: "{{ansible_user_dir}}/.config/nvim/init.vim"
-      src: "{{local_repositories_dir}}/dotfiles/init.vim"
+      dest: "{{ ansible_user_dir }}/.config/nvim/init.vim"
+      src: "{{ local_repositories_dir }}/dotfiles/init.vim"
       state: link
