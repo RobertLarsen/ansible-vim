@@ -5,11 +5,11 @@
       dest: "{{ local_repositories_dir }}/dotfiles"
 
 - name: Install Vim 8
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16"
+  when: ansible_distribution == "Ubuntu"
   include_tasks: install_vim8.yml
 
 - name: Install neovim
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16"
+  when: ansible_distribution == "Ubuntu"
   include_tasks: install_neovim.yml
 
 - name: Install vim and dependencies, Debian version
