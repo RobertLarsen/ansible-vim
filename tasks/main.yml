@@ -7,10 +7,6 @@
 - name: Install language server
   import_tasks: conquer_of_completion.yml
 
-- name: Install Vim 8
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 18
-  include_tasks: install_vim8.yml
-
 - name: Install neovim
   when: ansible_distribution == "Ubuntu"
   include_tasks: install_neovim.yml
@@ -22,7 +18,6 @@
       update_cache: yes
       name:
       - neovim
-      - vim
       - git
       - clang
       - build-essential
