@@ -64,6 +64,15 @@
 - set_fact: ctags=ctags-exuberant
   when: ansible_os_family == "Debian"
 
+- name: Symlink pip to pip3
+  become: true
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 20
+  file:
+      dest: /usr/bin/pip
+      src: /usr/bin/pip3
+      state: link
+
+
 - name: Create directories 
   file:
       path: "{{ item }}"
@@ -106,10 +115,20 @@
       src: "{{ local_repositories_dir }}/dotfiles/vimrc"
       state: link
 
-- name: Install TMUX configuration file
+- name: Know package versions
+  package_facts:
+      manager: auto
+
+- name: Install generic TMUX configuration file
   file:
       dest: "{{ ansible_user_dir }}/.tmux.conf"
       src: "{{ local_repositories_dir }}/dotfiles/tmux.conf"
+      state: link
+
+- name: Install version specific TMUX configuration file
+  file:
+      dest: "{{ ansible_user_dir }}/.tmuxX.conf"
+      src: "{{ local_repositories_dir }}/dotfiles/tmux{{ ansible_facts.packages['tmux'][0].version[0] }}.conf"
       state: link
 
 - name: Install PHP Coding Standard Fixer
