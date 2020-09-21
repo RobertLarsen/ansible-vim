@@ -67,24 +67,6 @@
       src: /usr/bin/pip3
       state: link
 
-
-- name: Create directories 
-  file:
-      path: "{{ item }}"
-      state: directory
-      recurse: true
-  with_items:
-      - "{{ local_repositories_dir }}"
-      - "{{ ansible_user_dir }}/.vim/bundle"
-      - "{{ ansible_user_dir }}/.vim/autoload"
-
-- name: Have ctags
-  command: "{{ ctags }} --fields=+S --sort=yes -f {{ ansible_user_dir }}/.vim/{{ item.outfile }} -R {{ item.path }}"
-  args:
-      creates: "{{ ansible_user_dir }}/.vim/{{ item.outfile }}"
-  with_items:
-      - {outfile: "systags", path: "/usr/include"}
-
 # I had .vimrc and .tmux.conf copied to the $HOME folder
 # Now I would rather have symlinks to a GitHub repo
 # So if they are files, delete them
@@ -103,12 +85,6 @@
 - name: Delete .tmux.conf if it is a file
   file: path="{{ ansible_user_dir }}/.tmux.conf" state=absent
   when: tmux_conf.stat.isreg is defined and tmux_conf.stat.isreg
-
-- name: Install Vim configuration files
-  file:
-      dest: "{{ ansible_user_dir }}/.vimrc"
-      src: "{{ local_repositories_dir }}/dotfiles/vimrc"
-      state: link
 
 - name: Know package versions
   package_facts:
@@ -134,6 +110,3 @@
       owner: root
       group: root
       mode: "0755"
-
-- name: Install Vim plugins
-  import_tasks: install_vim_plugins.yml
