@@ -1,6 +1,7 @@
 ---
 - name: Have my dotfiles
   git: 
+      update: no
       repo: https://github.com/RobertLarsen/dotfiles.git
       dest: "{{ local_repositories_dir }}/dotfiles"
 
@@ -23,10 +24,10 @@
       - build-essential
       - cmake
       - python3-dev
-      - exuberant-ctags
       - golang-go
       - tmux
       - shellcheck
+      - universal-ctags
 
 - name: Install python-dev on Debian lower than 20
   when: ansible_os_family == "Debian"
@@ -52,12 +53,6 @@
       - golang-docs
       - tmux
       - shellcheck
-
-- set_fact: ctags=ctags
-  when: ansible_os_family == "RedHat"
-
-- set_fact: ctags=ctags-exuberant
-  when: ansible_os_family == "Debian"
 
 - name: Symlink pip to pip3
   become: true
