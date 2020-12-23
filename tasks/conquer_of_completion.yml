@@ -18,3 +18,18 @@
           - maven
           - gradle
 
+- name: CoC extensions dir
+  file:
+      path: "{{ coc_extensions_dir }}"
+      state: directory
+
+- name: CoC package.json
+  copy:
+      src: package.json
+      dest: "{{ coc_extensions_dir }}"
+
+- name: CoC extensions
+  command:
+      chdir: "{{ coc_extensions_dir }}"
+      cmd: "npm install"
+      creates: "{{ coc_extensions_dir }}/packages"
