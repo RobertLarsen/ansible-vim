@@ -1,16 +1,21 @@
 ---
+- name: Check if this is a desktop environment
+  stat:
+      path: /usr/bin/broadwayd
+  register: desktop
+
 - name: Have my dotfiles
   git: 
       update: no
       repo: https://github.com/RobertLarsen/dotfiles.git
       dest: "{{ local_repositories_dir }}/dotfiles"
 
-- name: Install language server
-  import_tasks: conquer_of_completion.yml
-
 - name: Install neovim
   when: ansible_distribution == "Ubuntu"
   include_tasks: install_neovim.yml
+
+- name: Install language server
+  import_tasks: conquer_of_completion.yml
 
 - name: Install vim and dependencies, Debian version
   when: ansible_os_family == "Debian"
