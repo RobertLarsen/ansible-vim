@@ -1,3 +1,3 @@
 ---
-node_version: "14"
+node_version: "15"
 coc_extensions_dir: "{{ ansible_user_dir }}/.config/coc/extensions"
