@@ -12,6 +12,13 @@
       path: "{{ coc_extensions_dir }}"
       state: directory
 
+
+- name: CoC configuration file
+  file:
+      dest: "{{ ansible_user_dir }}/.config/nvim/coc-settings.json"
+      src: "{{ local_repositories_dir }}/dotfiles/coc-settings.json"
+      state: link
+
 - name: CoC package.json
   copy:
       src: package.json
