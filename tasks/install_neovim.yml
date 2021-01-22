@@ -59,6 +59,12 @@
       executable: pip3
       name:
           - neovim
+
+- name: Have ueberzug
+  when: desktop.stat.exists
+  pip:
+      executable: pip3
+      name:
           - ueberzug
 
 - name: Install NeoVim pip package for Python 2
