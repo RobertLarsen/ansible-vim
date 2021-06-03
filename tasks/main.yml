@@ -93,12 +93,3 @@
       dest: "{{ ansible_user_dir }}/.tmuxX.conf"
       src: "{{ local_repositories_dir }}/dotfiles/tmux{{ ansible_facts.packages['tmux'][0].version[0] }}.conf"
       state: link
-
-- name: Install PHP Coding Standard Fixer
-  become: true
-  get_url:
-      url: http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar
-      dest: /usr/local/bin/php-cs-fixer
-      owner: root
-      group: root
-      mode: "0755"
