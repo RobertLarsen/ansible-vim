@@ -5,7 +5,7 @@
   register: desktop
 
 - name: Have my dotfiles
-  git: 
+  git:
       update: no
       repo: https://github.com/RobertLarsen/dotfiles.git
       dest: "{{ local_repositories_dir }}/dotfiles"
@@ -58,14 +58,6 @@
       - golang-docs
       - tmux
       - shellcheck
-
-- name: Symlink pip to pip3
-  become: true
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int >= 20
-  file:
-      dest: /usr/bin/pip
-      src: /usr/bin/pip3
-      state: link
 
 # I had .vimrc and .tmux.conf copied to the $HOME folder
 # Now I would rather have symlinks to a GitHub repo
