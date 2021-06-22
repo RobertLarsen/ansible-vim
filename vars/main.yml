@@ -1,3 +1,7 @@
 ---
 node_version: "15"
 coc_extensions_dir: "{{ ansible_user_dir }}/.config/coc/extensions"
+
+gradle_version: 7.1
+gradle_url: "https://services.gradle.org/distributions/gradle-{{ gradle_version }}-bin.zip"
+gradle_path: "/opt/gradle-{{ gradle_version }}"

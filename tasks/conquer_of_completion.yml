@@ -5,13 +5,41 @@
       name:
           - clangd
           - maven
+
+- name: No gradle from apt
+  become: true
+  apt:
+      name:
           - gradle
+      state: absent
+
+- name: Recent gradle
+  unarchive:
+      remote_src: yes
+      src: "{{ gradle_url }}"
+      dest: /opt
+      creates: "{{ gradle_path }}"
+
+- name: Symlink gradle dir
+  become: true
+  file:
+      src: "{{ gradle_path }}"
+      dest: /opt/gradle
+      state: link
+
+- name: Symlink gradle
+  become: true
+  file:
+      src: /opt/gradle/bin/gradle
+      dest: /usr/bin/gradle
+      state: link
+
 
 - name: CoC extensions dir
+  become: true
   file:
       path: "{{ coc_extensions_dir }}"
       state: directory
-
 
 - name: CoC configuration file
   file:
